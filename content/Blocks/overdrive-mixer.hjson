@@ -1,0 +1,29 @@
+type: GenericCrafter
+name: "Overdrive Coolant Mixer"
+description: "Infuses Cryofluid with Surge Alloy to produce Overdrive Coolant."
+size: 2
+hasPower: true
+hasLiquids: true
+liquidCapacity: 40
+craftTime: 60
+outputLiquid: "overdrive-coolant/0.3"
+consumes: {
+  power: 2.5
+  items: {
+    items: [
+      surge-alloy/1
+    ]
+  }
+  liquid: {
+    liquid: "cryofluid"
+    amount: 0.3
+  }
+}
+requirements: [
+  lead/80
+  titanium/60
+  silicon/60
+  surge-alloy/25
+]
+category: crafting
+research: "cryofluid-mixer"
