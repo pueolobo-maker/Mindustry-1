@@ -1,20 +1,58 @@
 package example;
 
-import mindustry.Vars;
+import arc.graphics.Color;
 import mindustry.content.*;
 import mindustry.entities.*;
 import mindustry.mod.*;
 import mindustry.type.*;
 import mindustry.world.*;
 import mindustry.world.blocks.defense.*;
+import mindustry.world.blocks.production.*;
 
 public class ExampleJavaMod extends Mod {
+    public static Liquid overdriveCoolant;
+    public static Block overdriveMixer;
     public static Block coolantOverdrive;
 
     @Override
     public void loadContent() {
+        overdriveCoolant = new Liquid("overdrive-coolant", Color.valueOf("f3e979")) {{
+            localizedName = "Overdrive Coolant";
+            description = "An ultra-efficient coolant infused with Surge energy that massively boosts turret fire rates and production speeds.";
+            barColor = Color.valueOf("f3e979");
+            lightColor = Color.valueOf("f3e97980");
+            heatCapacity = 1.8f;
+            temperature = 0.1f;
+            viscosity = 0.3f;
+            flammability = 0f;
+            explosiveness = 0f;
+            coolant = true;
+            effect = StatusEffects.overdrive;
+        }};
+
+        overdriveMixer = new GenericCrafter("overdrive-mixer") {{
+            localizedName = "Overdrive Coolant Mixer";
+            description = "Infuses Cryofluid with Surge Alloy to produce Overdrive Coolant.";
+            size = 2;
+            hasPower = true;
+            hasLiquids = true;
+            liquidCapacity = 40f;
+            craftTime = 60f;
+            outputLiquid = new LiquidStack(overdriveCoolant, 0.3f);
+            requirements(Category.crafting, ItemStack.with(
+                Items.lead, 80,
+                Items.titanium, 60,
+                Items.silicon, 60,
+                Items.surgeAlloy, 25
+            ));
+
+            consumePower(2.5f);
+            consumeItem(Items.surgeAlloy, 1);
+            consumeLiquid(Liquids.cryofluid, 0.3f);
+        }};
+
         coolantOverdrive = new OverdriveProjector("coolant-overdrive") {{
-            localizedName = "Coolant Overdrive Projector";
+            localizedName = "Overdrive Coolant Projector";
             description = "Requires Overdrive Coolant. Boosts nearby buildings by 350% and permanently overdrives friendly units that enter its range.";
             size = 3;
             range = 220f;
@@ -33,12 +71,7 @@ public class ExampleJavaMod extends Mod {
             ));
 
             consumePower(8f);
-        }
-
-        @Override
-        public void init() {
-            consumeLiquid(Vars.content.liquid("mindustry-1-overdrive-coolant"), 0.2f);
-            super.init();
+            consumeLiquid(overdriveCoolant, 0.2f);
         }
 
         public class CoolantOverdriveBuild extends OverdriveBuild {
