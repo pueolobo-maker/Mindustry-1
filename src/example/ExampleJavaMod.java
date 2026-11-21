@@ -33,7 +33,12 @@ public class ExampleJavaMod extends Mod {
             ));
 
             consumePower(8f);
+        }
+
+        @Override
+        public void init() {
             consumeLiquid(Vars.content.liquid("mindustry-1-overdrive-coolant"), 0.2f);
+            super.init();
         }
 
         public class CoolantOverdriveBuild extends OverdriveBuild {
