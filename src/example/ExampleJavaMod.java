@@ -1,9 +1,8 @@
 package example;
 
-import arc.util.*;
+import mindustry.Vars;
 import mindustry.content.*;
 import mindustry.entities.*;
-import mindustry.gen.*;
 import mindustry.mod.*;
 import mindustry.type.*;
 import mindustry.world.*;
@@ -37,19 +36,16 @@ public class ExampleJavaMod extends Mod {
             consumeLiquid(Vars.content.liquid("mindustry-1-overdrive-coolant"), 0.2f);
         }
 
-        @Override
-        public OverdriveBuild newBuilding() {
-            return new OverdriveBuild() {
-                @Override
-                public void updateTile() {
-                    super.updateTile();
-                    if (efficiency > 0f) {
-                        Units.nearby(team, x, y, range, unit -> {
-                            unit.apply(StatusEffects.overdrive, 9999999f);
-                        });
-                    }
+        public class CoolantOverdriveBuild extends OverdriveBuild {
+            @Override
+            public void updateTile() {
+                super.updateTile();
+                if (efficiency > 0f) {
+                    Units.nearby(team, x, y, range, unit -> {
+                        unit.apply(StatusEffects.overdrive, 9999999f);
+                    });
                 }
-            };
+            }
         }};
     }
 }
