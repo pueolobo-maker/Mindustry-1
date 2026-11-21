@@ -3,6 +3,6 @@ name: "mindustry-1"
 author: "pueolobo-maker"
 description: "Adds Overdrive Coolant and a Coolant Overdrive Projector that boosts both buildings and units."
 version: "1.0.0"
-minGameVersion: "146"
+minGameVersion: "160"
 main: "example.ExampleJavaMod"
 java: true
