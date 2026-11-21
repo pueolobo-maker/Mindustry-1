@@ -1,6 +1,8 @@
-displayName: "My First Mod"
+displayName: "Overdrive max"
 name: "mindustry-1"
-author: "YourName"
-description: "My first Mindustry mod!"
+author: "pueolobo-maker"
+description: "Adds Overdrive Coolant and a Coolant Overdrive Projector that boosts both buildings and units."
 version: "1.0.0"
 minGameVersion: "146"
+main: "example.ExampleJavaMod"
+java: true
