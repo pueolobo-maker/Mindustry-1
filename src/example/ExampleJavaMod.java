@@ -2,6 +2,7 @@ package example;
 
 import arc.graphics.Color;
 import mindustry.content.*;
+import mindustry.content.TechTree.*;
 import mindustry.entities.*;
 import mindustry.mod.*;
 import mindustry.type.*;
@@ -85,5 +86,21 @@ public class ExampleJavaMod extends Mod {
                 }
             }
         }};
+
+        // Serpulo Tech Tree nodes
+        TechNode cryoNode = TechTree.all.find(t -> t.content == Liquids.cryofluid);
+        if (cryoNode != null) {
+            new TechNode(cryoNode, overdriveCoolant, overdriveCoolant.researchRequirements());
+        }
+
+        TechNode mixerNode = TechTree.all.find(t -> t.content == Blocks.cryofluidMixer);
+        if (mixerNode != null) {
+            new TechNode(mixerNode, overdriveMixer, overdriveMixer.researchRequirements());
+        }
+
+        TechNode domeNode = TechTree.all.find(t -> t.content == Blocks.overdriveDome);
+        if (domeNode != null) {
+            new TechNode(domeNode, coolantOverdrive, coolantOverdrive.researchRequirements());
+        }
     }
 }
